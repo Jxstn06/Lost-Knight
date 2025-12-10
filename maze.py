@@ -29,25 +29,27 @@ class Maze:
 
         while stack:
             x, y = stack[-1]
+            # Damit der Spawn bleibt
             self.grid[y][x].feldtyp = 'Weg' if (x, y) != (start_x, start_y) else 'Spawn'
 
             # Liste der Nachbarn, die noch unbesucht sind
             nachbarn = []
-            for dx, dy in richtungen:
-                Nachbar_x, Nachbar_y = x + dx, y + dy
+            for richtung_x, richtung_y in richtungen:
+                Nachbar_x, Nachbar_y = x + richtung_x, y + richtung_y
+                # Ist der Schritt überhaupt möglich?
                 if 0 < Nachbar_x < self.width and 0 < Nachbar_y < self.height and (Nachbar_x, Nachbar_y) not in visited:
                     if self.grid[Nachbar_y][Nachbar_x].feldtyp == 'Wand':
                         nachbarn.append((Nachbar_x, Nachbar_y))
 
             if nachbarn:
-                # Wähle zufälligen Nachbarn
+                # Zufälligen Nachbar
                 Nachbar_x, Nachbar_y = r.choice(nachbarn)
                 # Wand zwischen x,y und Nachbar_x,Nachbar_y entfernen
                 self.grid[y + (Nachbar_y - y)//2][x + (Nachbar_x - x)//2].feldtyp = 'Weg'
                 visited.add((Nachbar_x, Nachbar_y))
                 stack.append((Nachbar_x, Nachbar_y))
             else:
-                # Sackgasse, backtrack
+                # Sackgasse
                 stack.pop()
 
     def draw_grid(self):
