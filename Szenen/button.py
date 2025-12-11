@@ -18,7 +18,7 @@ class Button:
         # Farbe wechselt je nach Maus Position
         pygame.draw.rect(screen, self.hover_color if is_hover else self.color, self.rect)
         text = self.font.render(self.text, True, (255, 255, 255))
-        text_rect = text.get_rect()
+        text_rect = text.get_rect(center=self.rect.center)
         screen.blit(text, text_rect)
 
 

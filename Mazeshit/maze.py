@@ -1,5 +1,5 @@
 import random as r
-from feld import Feld
+from Mazeshit.feld import Feld
 
 class Maze:
     def __init__(self, width, height):

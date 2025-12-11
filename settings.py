@@ -1,8 +1,8 @@
 class Settings:
 
     def __init__(self):
-        self.screen_breite = 775
-        self.screen_hoehe = 775
+        self.screen_breite = 1280
+        self.screen_hoehe = 720
         self.hintergrundFarbe = (0, 0, 0)
         self.fps = 60
 

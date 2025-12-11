@@ -1,39 +1,51 @@
 import pygame
 from settings import Settings
-from formencode import MenuScene  # deine Start-Scene
+from manager import Manager
+from Szenen.menu_szene import MenuScene
 
-class Game:
+
+class LostKnight:
     def __init__(self):
         pygame.init()
         self.settings = Settings()
-        self.screen = pygame.display.set_mode(
-            (self.settings.bildschirm_breite, self.settings.bildschirm_hoehe)
-        )
-        pygame.display.set_caption("Rogue-like RPG")
+        self.screen = pygame.display.set_mode((self.settings.screen_breite, self.settings.screen_hoehe))
         self.clock = pygame.time.Clock()
-        self.running = True
 
-        # Aktive Scene
-        self.current_scene = None
+        self.manager = Manager('start')
+        self.start = MenuScene(self.screen, self.manager)
+        self.level = Level(self.screen, self.manager)
 
-    def set_scene(self, scene):
-        """Aktuelle Scene wechseln"""
-        self.current_scene = scene
-        self.current_scene.game = self  # Scene bekommt Zugriff auf Game
+        self.states = {'start': self.start,
+                       'level': self.level}
 
     def run(self):
-        while self.running:
+        while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.running = False
-                elif self.current_scene:
-                    self.current_scene.handle_events(event)
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    self.manager.set_state('level')
 
-            if self.current_scene:
-                self.current_scene.update()
-                self.current_scene.draw(self.screen)
+            self.states[self.manager.get_state()].run()
+            pygame.display.update()
 
-            pygame.display.flip()
+
             self.clock.tick(self.settings.fps)
 
-        pygame.quit()
+
+class Level:
+    def __init__(self, display, manager):
+        self.display = display
+        self.manager = manager
+
+    def run(self):
+        self.display.fill('blue')
+
+
+class Start:
+    def __init__(self, display, manager):
+        self.display = display
+        self.manager = manager
+
+    def run(self):
+        self.display.fill('red')
