@@ -28,6 +28,7 @@ class Maze:
         visited.add((start_x, start_y))
 
         while stack:
+            # Nimmt das letzte Element im Stack
             x, y = stack[-1]
             # Damit der Spawn bleibt
             self.grid[y][x].feldtyp = 'Weg' if (x, y) != (start_x, start_y) else 'Spawn'
