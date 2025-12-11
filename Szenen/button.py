@@ -17,11 +17,14 @@ class Button:
         is_hover = self.rect.collidepoint(mouse_pos)
         # Farbe wechselt je nach Maus Position
         pygame.draw.rect(screen, self.hover_color if is_hover else self.color, self.rect)
-        text = self.font.render(self.text, True, (255, 255, 255))
+        text = self.font.render(self.text, True, (0, 0, 0))
         text_rect = text.get_rect(center=self.rect.center)
         screen.blit(text, text_rect)
 
 
     # Ein Event für die Funktion des Buttons
     def is_clicked(self, event):
-        return event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = pygame.mouse.get_pos()
+            return self.rect.collidepoint(mouse_pos)
+        return False
