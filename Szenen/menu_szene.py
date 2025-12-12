@@ -16,20 +16,20 @@ class MenuScene(Scene):
 
         self.font = pygame.font.Font(None, 30)
         self.buttons = [
-                        Button((self.settings.screen_breite/2)-100, 150, 200, 50, "New Character", self.font),
-                        Button((self.settings.screen_breite/2)-100, 220, 200, 50, "Load Character", self.font),
-                        Button((self.settings.screen_breite/2)-100, 290, 200, 50, "Settings", self.font),
-                        Button((self.settings.screen_breite/2)-100, 360, 200, 50, "Quit", self.font)
+                        Button((self.settings.screen_breite/2)-100, 150, 200, 50, 'New Character', self.font),
+                        Button((self.settings.screen_breite/2)-100, 220, 200, 50, 'Load Character', self.font),
+                        Button((self.settings.screen_breite/2)-100, 290, 200, 50, 'Settings', self.font),
+                        Button((self.settings.screen_breite/2)-100, 360, 200, 50, 'Quit', self.font)
                         ]
 
     def on_button_click(self, text):
-        if text == "New Character":
+        if text == 'New Character':
             self.manager.set_state('level')
-        elif text == "Load Character":
+        elif text == 'Load Character':
             self.manager.set_state('loadchar')
-        elif text == "Settings":
+        elif text == 'Settings':
             self.manager.set_state('settings')
-        elif text == "Quit":
+        elif text == 'Quit':
             pygame.quit()
 
     def handle_events(self, event):
