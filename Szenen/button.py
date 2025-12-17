@@ -2,10 +2,10 @@ import pygame
 
 
 class Button:
-    def __init__(self, x, y, breite, hoehe, text, font, color=(200, 200, 200), hover_color=(255, 255, 0)):
+    def __init__(self, x, y, breite, hoehe, text, color=(200, 200, 200), hover_color=(255, 255, 0)):
         self.rect = pygame.Rect(x, y, breite, hoehe)
         self.text = text
-        self.font = font
+        self.font = pygame.font.Font(None, 30)
         self.color = color
         self.hover_color = hover_color
 
@@ -20,7 +20,6 @@ class Button:
         text = self.font.render(self.text, True, (0, 0, 0))
         text_rect = text.get_rect(center=self.rect.center)
         screen.blit(text, text_rect)
-
 
     # Ein Event für die Funktion des Buttons
     def is_clicked(self, event):

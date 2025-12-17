@@ -39,5 +39,5 @@ class MenuScene(Scene):
 
     def run(self):
         self.display.fill(self.settings.hintergrundFarbe)
-        for button in self .buttons:
+        for button in self.buttons:
             button.draw(self.display)
