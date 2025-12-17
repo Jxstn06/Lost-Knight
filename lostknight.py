@@ -1,9 +1,12 @@
 import pygame
+import sys
+
+from Szenen.loadcharakter_szene import LoadCharacterScene
+from Szenen.settings_szene import SettingsScene
 from settings import Settings
 from manager import Manager
 from Szenen.menu_szene import MenuScene
-from Szenen.button import Button
-from Szenen.basis_szene import Scene
+from Szenen.newcharakter_szene import NewCharacterScene
 
 
 class LostKnight:
@@ -12,33 +15,30 @@ class LostKnight:
         self.settings = Settings()
         self.screen = pygame.display.set_mode((self.settings.screen_breite, self.settings.screen_hoehe))
         self.clock = pygame.time.Clock()
+        self.running = True
 
         self.manager = Manager('menuszene')
         self.menuszene = MenuScene(self.screen, self.manager)
-        self.level = Level(self.screen, self.manager)
+        self.newcharakterszene = NewCharacterScene(self.screen, self.manager)
+        self.loadcharakterszene = LoadCharacterScene(self.screen, self.manager)
+        self.settingsszene = SettingsScene(self.screen, self.manager)
 
         self.states = {'menuszene': self.menuszene,
-                       'level': self.level}
+                       'newcharakterszene': self.newcharakterszene,
+                       'loadcharakterszene': self.loadcharakterszene,
+                       'settingsszene': self.settingsszene}
 
     def run(self):
-        while True:
+        while self.running:
             for event in pygame.event.get():
+                # Fenster geschlossen
                 if event.type == pygame.QUIT:
-                    pygame.quit()
-                # Event wird an Szene weitergegeben
+                    self.running = False
                 self.states[self.manager.get_state()].handle_events(event)
             # Läuft die aktuelle Szene
             self.states[self.manager.get_state()].run()
             pygame.display.update()
             self.clock.tick(self.settings.fps)
 
-
-# Test für den Szenen wechsel
-class Level(Scene):
-    def __init__(self, display, manager):
-        super().__init__()
-        self.display = display
-        self.manager = manager
-
-    def run(self):
-        self.display.fill('blue')
+        pygame.quit()
+        sys.exit()

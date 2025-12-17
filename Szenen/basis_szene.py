@@ -8,5 +8,5 @@ class Scene:
     def update(self):
         pass
 
-    def draw(self, screen):
+    def draw(self):
         pass

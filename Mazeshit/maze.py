@@ -68,3 +68,7 @@ class Maze:
                         drawGrid += '?'
             drawGrid += '\n'
         return drawGrid
+
+a = Maze(41, 41)
+
+print(a.draw_grid())

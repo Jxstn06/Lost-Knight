@@ -1,17 +1,33 @@
 import pygame
+
 from Szenen.basis_szene import Scene
+from Szenen.button import Button
+from settings import Settings
+
 
 class NewCharacterScene(Scene):
-    def __init__(self):
+
+    def __init__(self, display, manager):
         super().__init__()
+        self.display = display
+        self.manager = manager
+        self.settings = Settings()
+
         self.font = pygame.font.Font(None, 50)
+        self.buttons = [
+            Button((self.settings.screen_breite/2)-100, (self.settings.screen_hoehe/8)*6, 200, 50, 'Create', self.font)
+
+            ]
+        self.textboxes = []
+
+    def on_button_click(self, text):
+        pass
 
     def handle_events(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            from Szenen.menu_szene import MenuSzene
-            self.lostknight.set_scene(MenuSzene())
+            self.manager.set_state('menuszene')
 
-    def draw(self, screen):
-        screen.fill((0, 0, 50))
-        text_surf = self.font.render("New Character - Press ESC to go back", True, (255, 255, 255))
-        screen.blit(text_surf, (50, 200))
+    def run(self):
+        self.display.fill(self.settings.hintergrundFarbe)
+        for button in self .buttons:
+            button.draw(self.display)

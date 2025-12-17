@@ -1,9 +1,8 @@
 import pygame
+import sys
+
 from Szenen.basis_szene import Scene
 from Szenen.button import Button
-from Szenen.newcharakter_szene import NewCharacterScene
-from Szenen.loadcharakter_szene import LoadCharacterScene
-from Szenen.settings_szene import SettingsScene
 from settings import Settings
 
 
@@ -24,13 +23,14 @@ class MenuScene(Scene):
 
     def on_button_click(self, text):
         if text == 'New Character':
-            self.manager.set_state('level')
+            self.manager.set_state('newcharakterszene')
         elif text == 'Load Character':
-            self.manager.set_state('loadchar')
+            self.manager.set_state('loadcharakterszene')
         elif text == 'Settings':
-            self.manager.set_state('settings')
+            self.manager.set_state('settingsszene')
         elif text == 'Quit':
             pygame.quit()
+            sys.exit()
 
     def handle_events(self, event):
         for button in self.buttons:
@@ -38,7 +38,6 @@ class MenuScene(Scene):
                 self.on_button_click(button.text)
 
     def run(self):
-        self.display.fill((0, 0, 0))
+        self.display.fill(self.settings.hintergrundFarbe)
         for button in self .buttons:
             button.draw(self.display)
-
