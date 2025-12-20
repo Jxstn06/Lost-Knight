@@ -11,6 +11,8 @@ class Spieler(SQLObject):
     Verteidigung = IntCol()
     X = IntCol()
     Y = IntCol()
+    Maze = StringCol()
+
 
 # Existiert ja
 Spieler.createTable(ifNotExists=True)

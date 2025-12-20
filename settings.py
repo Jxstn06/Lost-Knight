@@ -7,4 +7,6 @@ class Settings:
         self.fps = 30
 
         # Maze Größe
-        self.maze_sizes = {'klein': (21, 21), 'mittel': (31, 31), 'groß': (41, 41)}
+        self.maze_sizes = {'klein': (21, 21),
+                           'mittel': (31, 31),
+                           'groß': (41, 41)}

@@ -1,6 +1,7 @@
 import random as r
 from Mazeshit.feld import Feld
 
+
 class Maze:
     def __init__(self, width, height):
         # Größe des Maze:
@@ -18,6 +19,7 @@ class Maze:
     def startpunkt(self):
         start_x, start_y = self.cords['Spawn']
         self.grid[start_y][start_x].feldtyp = 'Spawn'
+        return start_x, start_y
 
     def weg_algorithmus(self):
         richtungen = [(0, 2), (2, 0), (0, -2), (-2, 0)]
@@ -68,7 +70,3 @@ class Maze:
                         drawGrid += '?'
             drawGrid += '\n'
         return drawGrid
-
-a = Maze(41, 41)
-
-print(a.draw_grid())
