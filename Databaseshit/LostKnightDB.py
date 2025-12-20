@@ -5,7 +5,7 @@ sqlhub.processConnection = connectionForURI('sqlite:Spieler.sqlite')
 
 class Spieler(SQLObject):
     Name = StringCol()
-    Level = StringCol()
+    Level = IntCol()
     Leben = IntCol()
     Kraft = IntCol()
     Verteidigung = IntCol()
@@ -13,4 +13,4 @@ class Spieler(SQLObject):
     Y = IntCol()
 
 # Existiert ja
-# Spieler.createTable(ifNotExists=True)
+Spieler.createTable(ifNotExists=True)
